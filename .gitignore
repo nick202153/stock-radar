@@ -1,0 +1,19 @@
+.env
+*.db
+*.db.bak
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# docs / 文件
+*.md
+docs/
+
+# 服務執行檔與log/lock
+*.exe
+*.log
+*.lock
+
+# 本機Claude Code權限設定（machine-specific，不分享）
+.claude/settings.local.json

@@ -1,0 +1,23 @@
+<service>
+  <!-- 服務唯一 ID -->
+  <id>stock_system_service</id>
+  <!-- 在 Windows 服務管理員中顯示的名稱 -->
+  <name>Stock Analysis System (Streamlit)</name>
+  <!-- 服務描述 -->
+  <description>本機股票分析系統，包含 Streamlit 網頁與每小時自動更新排程。</description>
+  
+  <!-- 執行檔路徑：使用完整路徑以確保系統能找到 Python -->
+  <executable>C:\Users\nick2\AppData\Local\Programs\Python\Python311\python.exe</executable>
+  
+  <!-- 執行參數 -->
+  <arguments>-m streamlit run app.py --server.port 8501 --server.headless true</arguments>
+  
+  <!-- 工作目錄 -->
+  <workingdirectory>D:\新增資料夾\stock</workingdirectory>
+  
+  <!-- 日誌設定：自動輪替，避免檔案過大 -->
+  <log mode="roll"></log>
+  
+  <!-- 啟動模式：自動 -->
+  <startmode>Automatic</startmode>
+</service>
