@@ -15,5 +15,5 @@ docs/
 *.log
 *.lock
 
-# 本機Claude Code權限設定（machine-specific，不分享）
-.claude/settings.local.json
+# Claude Code 設定/skill資料，整個不進repo
+.claude/
