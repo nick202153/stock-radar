@@ -15,9 +15,12 @@ def get_effective_trading_date(cutoff_hour: int = _MARKET_CLOSE_HOUR) -> str:
     """
     回傳「目前可預期已有資料」的最新交易日（非單純日曆日）。
     跨日後到收盤緩衝時間前，當日資料尚未出爐，視為前一天，避免對空資料發送無效API call。
+    再跳過週六/週日，避免長假期間目標日落在非交易日導致永遠抓不到資料（無法判斷國定假日，仍可能卡住）。
     """
     now = datetime.now()
     eff = now if now.hour >= cutoff_hour else now - timedelta(days=1)
+    while eff.weekday() >= 5:  # 5=Sat, 6=Sun
+        eff -= timedelta(days=1)
     return eff.strftime("%Y-%m-%d")
 
 

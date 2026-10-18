@@ -146,7 +146,8 @@ def _release_lock():
 
 # ── 主流程 ────────────────────────────────────────────────────────────────────
 
-PRICE_RETRY_HOURS = 6  # 價格抓不到新資料（下市/停牌）時，冷卻時間，避免無限重試燒配額
+PRICE_RETRY_HOURS = 6   # 價格抓不到新資料（下市/停牌）時，冷卻時間，避免無限重試燒配額
+PHASE0_RESERVE    = 50  # 保留給Phase0（財務資料/股本）的最低配額，避免Phase1吃光導致股本永遠補不到
 
 
 def main():
@@ -212,7 +213,7 @@ def _run():
 
     price_count = 0
     for s in price_todo:
-        if quota_used >= QUOTA_LIMIT: break
+        if quota_used >= QUOTA_LIMIT - PHASE0_RESERVE: break  # 保留配額給Phase0
         sid = s["stock_id"]
         try:
             fetch_price_history(sid)
